@@ -196,8 +196,17 @@ sudo xcode-select --install
 
 
 Git command to set some editor default for editing git settings
+Sublime Text
 git config --global core.editor "'/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' -n -w"
 git config --global -e
+
+VSCode
+1. After VSCode is installed open it and hit command + shift + p and type shell.
+2. choose the first option to add code to PATH
+3. git config --globa -e
+4. make sure the below like is added to the core setion
+[core]
+	editor = code --wait
 
 
 Git Publish to Remote Repository
@@ -211,7 +220,7 @@ git push -u origin master <branch name>
 
 
 -------------------------------------------------
-git diff
+git diff default tool
 -------------------------------------------------
 To check if there is any diff tool configured
 git config --global --get diff.tool
@@ -219,3 +228,65 @@ git config --global --get diff.tool
 
 Set the Default diff tool
 git config --global diff.tool default-difftool
+
+Now Open the configuration file
+git config --global -e
+
+Add the lines below to the bottom of the page
+[difftool "default-difftool"]
+    cmd = code --wait --diff $LOCAL $REMOTE	
+
+Once these changes are done you should be able to bring up the differences between two commits 
+git difftool <COMMIT_ID> <COMMIT_ID>
+
+Additionally, you can also find the difference between the code in current working directory and current commit
+git difftool <FILE_NAME>
+
+Note that the default diff tool is still available on the command line. You can check using:
+git diff HEAD (This will work when the changes are not staged)
+git diff --cached <FILE_NAME> (This will work when changes are staged using git add .)
+
+
+In the above command you will notice that a confirmation is requested each time difftool is called.
+This may get annoying. You can reset this.
+git config --global difftool.prompt false
+git config --global --get difftool.prompt
+false
+
+-------------------------------------------------
+git Merge Default tool
+-------------------------------------------------
+git config --global merge.tool #Check if any tool is configured
+git config --global merge.tool code
+git config --global mergetool.code.cmd "code --wait $MERGED"
+git config --global mergetool.prompt false
+git config --global mergetool.keepbackup false
+
+-------------------------------------------------
+git Branching
+-------------------------------------------------
+http://onlywei.github.io/explain-git-with-d3/#zen
+
+To create a branch and then checkout
+git branch f1 
+git checkout f1
+
+or
+
+git checkout -b f2 # with this command make sure the branch does not exist.
+
+git checkout -b b1
+git checkout b1
+git branch #List all local branches.
+git branch -a
+git branch -d b1 #Delete a branch that has merged changes.
+git branch -D b1 #Force delete a branch even if its changes are not merged.
+
+-------------------------------------------------
+git Merging
+-------------------------------------------------
+git checkout <BRANCH_NAME> # Checkout the branch on which you want to merge.
+git merge <MERGE_BRANCH_NAME> #Branch Name which should be merged to checked out branch.
+
+git checkout master
+git merge f1 # All the changes in f1 are merged to master.
