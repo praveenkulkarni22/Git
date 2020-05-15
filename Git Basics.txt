@@ -49,6 +49,9 @@ git checkout -- README.md
 
 checking the git log
 git log --oneline --graph --decorate --color
+b52089a (HEAD -> prod, origin/prod, origin/master, origin/HEAD, master) new file  
+a0bb0b8 Committed
+###Q:what is the meaning of this output???
 
 
 Remove files from git
