@@ -52,6 +52,9 @@ git log --oneline --graph --decorate --color
 b52089a (HEAD -> prod, origin/prod, origin/master, origin/HEAD, master) new file  
 a0bb0b8 Committed
 ###Q:what is the meaning of this output???
+git show <COMMIT_ID> 
+git show <COMMIT_ID> --name-status
+git show <COMMIT_ID> --name-only
 
 
 Remove files from git
@@ -205,3 +208,14 @@ git add .
 git commit -m "First Commit"
 git push -u origin master <branch name>
 
+
+
+-------------------------------------------------
+git diff
+-------------------------------------------------
+To check if there is any diff tool configured
+git config --global --get diff.tool
+
+
+Set the Default diff tool
+git config --global diff.tool default-difftool
